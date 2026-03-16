@@ -1,0 +1,56 @@
+
+
+
+CREATE TABLE users ( 
+    id INTEGER PRIMARY KEY,
+    firstName TEXT, 
+    lastName TEXT,
+    email TEXT UNIQUE NOT NULL,  
+    passwordHash TEXT,
+    membershipStatus BOOLEAN,
+    admin BOOLEAN
+    );
+
+CREATE TABLE messages (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    messageTitle TEXT,
+    messageText TEXT NOT NULL,
+    timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_ID) REFERENCES users(id)
+    );
+
+
+
+Views 
+- sign up page with sign up form
+    - sanitize and validate form fields
+    - bcrypt 
+    - password confirmation, custom validator
+
+- club joining (with secret password)
+    - using secret password updates membership status
+
+- login page with login form
+
+- Create new message page
+
+- home page
+    - display all Messages
+    - but author and date only visible to club membership
+    - delete msg button only visible to admin
+
+
+
+app.js / server.js  <- your main Express app
+├─ routes/          <- route definitions
+│   ├─ authRoutes.js
+│   ├─ userRoutes.js
+│   └─ messageRoutes.js
+├─ controllers/     <- handle logic for each route
+│   ├─ authController.js
+│   ├─ userController.js
+│   └─ messageController.js
+├─ models/          <- optional, for database models or ORM
+├─ queries/         <- optional, if using raw SQL queries
+└─ middleware/      <- optional, authentication, logging, etc.

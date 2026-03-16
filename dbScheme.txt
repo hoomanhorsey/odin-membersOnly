@@ -1,0 +1,21 @@
+CREATE TABLE users ( 
+    id INTEGER PRIMARY KEY,
+    firstName TEXT, 
+    lastName TEXT,
+    email TEXT UNIQUE NOT NULL,  
+    passwordHash TEXT,
+    membershipStatus BOOLEAN,
+    admin BOOLEAN
+    );
+
+CREATE TABLE messages (
+    id INTEGER PRIMARY KEY,
+    user_id INTEGER NOT NULL,
+    messageTitle TEXT,
+    messageText TEXT NOT NULL,
+    timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_ID) REFERENCES users(id)
+    );
+
+
+
