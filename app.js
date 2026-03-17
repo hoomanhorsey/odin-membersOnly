@@ -1,16 +1,16 @@
 const express = require("express");
 const app = express();
+app.set("view engine", "ejs");
 
+const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const msgRouter = require("./routes/msgRouter");
 
+app.use("/auth", authRouter);
 app.use("/users", userRouter);
 app.use("/", msgRouter);
 
 app.get("/", (req, res) => res.send("Hello, world!"));
-app.get("/signup", (req, res) => res.send("signup"));
-app.get("/login", (req, res) => res.send("login"));
-app.get("/joinclub", (req, res) => res.send("joinclub"));
 app.get("/newmessage", (req, res) => res.send("newmessage"));
 
 const PORT = process.env.PORT || 3000;

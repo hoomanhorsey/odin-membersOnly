@@ -1,0 +1,17 @@
+function createUserQuery(userData) {
+  // eventually here you would use your SQL or query code
+  console.log("Pretend this is your SQL query:", userData);
+  return "query result placeholder";
+}
+
+function loginUserQuery(userData) {
+  // eventually here you would use your SQL or query code
+  console.log("Pretend to login user");
+  return "User pretended to log in";
+}
+
+// Export it
+module.exports = {
+  createUserQuery,
+  loginUserQuery,
+};
