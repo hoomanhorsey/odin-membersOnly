@@ -10,10 +10,14 @@ function loginDisplay(req, res) {
 }
 
 async function loginUser(req, res) {
+  console.log("loginuser called");
+
   const userData = {
     email: req.body.email,
     password: req.body.password,
   };
+
+  console.log(req.body.email);
   const result = await loginUserQuery(userData);
 
   res.redirect("/");

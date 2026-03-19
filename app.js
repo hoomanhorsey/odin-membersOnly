@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
 
+app.use(express.urlencoded({ extended: true }));
+
 const authRouter = require("./routes/authRouter");
 const userRouter = require("./routes/userRouter");
 const msgRouter = require("./routes/msgRouter");

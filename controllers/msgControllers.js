@@ -1,8 +1,9 @@
 // Import the query function from userQueries.js
-const {} = require("../db/queries/msgQueries");
+const { getMsgsQuery } = require("../db/queries/msgQueries");
 
-function getMsgs(req, res) {
-  res.render("index");
+async function getMsgs(req, res) {
+  const rows = await getMsgsQuery();
+  res.render("index", { messages: rows });
 }
 
 // async function createUser(req, res) {

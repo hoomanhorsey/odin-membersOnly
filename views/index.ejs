@@ -10,5 +10,15 @@
 
     <a href="/auth/sign-up">Sign up</a>
     <a href="/auth/login">Login</a>
+<ul>
+    <% messages.forEach(message => { %>
+      <li>
+        <h2> <%= message.messagetitle %> </h2>
+        <p> <%= message.messagetext %> </p>
+        <p>Created at: <%=message.timecreated %> </p>
+
+      </li>
+      <% }); %>
+   </ul>
   </body>
 </html>
