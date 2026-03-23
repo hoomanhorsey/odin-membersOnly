@@ -1,0 +1,33 @@
+const pool = require("../pool");
+
+async function createUserQuery(userData) {
+  // eventually here you would use your SQL or query code
+  console.log("Calling createUserQuery", userData);
+  const { rows } = await pool.query(
+    "INSERT INTO users (firstName, lastName, email, passwordHash) VALUES ($1, $2, $3, $4) RETURNING *",
+    [userData.firstName, userData.lastName, userData.email, userData.password],
+  );
+  console.log(rows[0]);
+  return rows[0];
+}
+
+async function loginUserQuery(userData) {
+  // eventually here you would use your SQL or query code
+  console.log("createUser query called");
+  const { rows } = await pool.query("SELECT * FROM users");
+  console.log(rows[0]);
+  console.log("Pretend to login user");
+  return "User pretended to log in";
+}
+
+async function joinUserQuery() {
+  // insert logic
+
+  return "to be completed";
+}
+
+// Export it
+module.exports = {
+  createUserQuery,
+  loginUserQuery,
+};

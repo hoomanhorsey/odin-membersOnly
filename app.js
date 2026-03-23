@@ -2,6 +2,8 @@ const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
 
+const { body, validationResult } = require("express-validator");
+
 app.use(express.urlencoded({ extended: true }));
 
 const authRouter = require("./routes/authRouter");
@@ -10,9 +12,9 @@ const msgRouter = require("./routes/msgRouter");
 
 app.use("/auth", authRouter);
 app.use("/users", userRouter);
+
 app.use("/", msgRouter);
 
-app.get("/", (req, res) => res.send("Hello, world!"));
 app.get("/newmessage", (req, res) => res.send("newmessage"));
 
 const PORT = process.env.PORT || 3000;
@@ -23,5 +25,5 @@ app.listen(PORT, (error) => {
   if (error) {
     throw error;
   }
-  console.log(`My first Express app - listening on port ${PORT}!`);
+  console.log(`Members only app. Listening on ${PORT}!`);
 });

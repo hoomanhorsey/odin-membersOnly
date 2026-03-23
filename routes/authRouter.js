@@ -3,18 +3,21 @@ const { Router } = require("express");
 
 const authRouter = Router();
 
-const authController = require("../controllers/authControllers");
+const authController = require("../controllers/authController");
+const validation = require("../validation/authValidators");
 
-authRouter.get("/sign-up", authController.signUpDisplay);
-authRouter.post("/sign-up", authController.createUser);
+authRouter.get("/sign-up", authController.showSignUpForm);
+authRouter.post(
+  "/sign-up",
+  validation.validateUser,
+  authController.handleSignUp,
+);
 
-authRouter.get("/login", authController.loginDisplay);
-authRouter.post("/login", authController.loginUser);
+authRouter.get("/login", authController.showLoginForm);
+authRouter.post("/l ogin", authController.handleLogin);
 
-authRouter.get("/join", (req, res) => res.send("Join membership"));
-authRouter.post("/join", (req, res) => res.send("Join membership"));
-
-authRouter.get("/", (req, res) => res.send("All users"));
+authRouter.get("/join", authController.handleSignUp);
+authRouter.post("/join", authController.handleJoin);
 
 authRouter.get("/:userId", (req, res) => {
   const { authorId } = req.params;

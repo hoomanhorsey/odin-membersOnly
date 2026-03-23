@@ -3,12 +3,8 @@ const { Router } = require("express");
 
 const msgRouter = Router();
 
-const msgController = require("../controllers/msgControllers");
+const msgController = require("../controllers/msgController");
 
-msgRouter.get("/", msgController.getMsgs);
-// msgRouter.get("/:userId", (req, res) => {
-//   const { authorId } = req.params;
-//   res.send(`Author ID: ${authorId}`);
-// });
+msgRouter.get("/", msgController.showMsgs);
 
 module.exports = msgRouter;

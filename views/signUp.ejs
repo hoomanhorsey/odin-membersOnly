@@ -6,14 +6,15 @@
     <title>Document</title>
   </head>
   <body>
-    Hello sign up to this silly project app here.
+    Hello sign up to this silly project app here. <%-
+    include("partials/errors.ejs") %>
 
     <form action="/auth/sign-up" method="post">
-      <label for="fname">First name:</label>
-      <input type="text" id="fname" name="fname" />
+      <label for="firstName">First name:</label>
+      <input type="text" id="firstName" name="firstName" />
 
-      <label for="lname">Last name:</label>
-      <input type="text" id="lname" name="lname" />
+      <label for="lastName">Last name:</label>
+      <input type="text" id="lastName" name="lastName" />
 
       <label for="email">Email</label>
       <input type="email" id="email" name="email" />

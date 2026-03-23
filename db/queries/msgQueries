@@ -1,14 +1,11 @@
 const pool = require("../pool");
 
-async function getMsgsQuery() {
-  // eventually here you would use your SQL or query code
-  console.log("Pretend this is your SQL query:");
+async function getAllMsgsQuery() {
   const { rows } = await pool.query("SELECT * FROM messages");
-  console.log(rows[0]);
   return rows;
 }
 
 // Export it
 module.exports = {
-  getMsgsQuery,
+  getAllMsgsQuery,
 };
