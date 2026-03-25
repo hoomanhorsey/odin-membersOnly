@@ -12,7 +12,7 @@ CREATE TABLE users (
     firstName TEXT, 
     lastName TEXT,
     email TEXT UNIQUE NOT NULL,  
-    passwordHash TEXT,
+    password TEXT,
     membershipStatus BOOLEAN DEFAULT FALSE,
     adminStatus BOOLEAN DEFAULT FALSE
     );
@@ -26,7 +26,7 @@ CREATE TABLE messages (
     FOREIGN KEY (user_id) REFERENCES users(id)
     );
 
-INSERT INTO users (firstName, lastName, email, passwordHash, membershipStatus, adminStatus) 
+INSERT INTO users (firstName, lastName, email, password, membershipStatus, adminStatus) 
 VALUES
   ('Andrew','Ma', 'andrew@mail.com', 'Blankpassword', TRUE, TRUE);
 

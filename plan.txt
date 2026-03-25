@@ -6,7 +6,7 @@ CREATE TABLE users (
     firstName TEXT, 
     lastName TEXT,
     email TEXT UNIQUE NOT NULL,  
-    passwordHash TEXT,
+    password TEXT,
     membershipStatus BOOLEAN,
     admin BOOLEAN
     );

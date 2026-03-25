@@ -6,9 +6,8 @@
     <title>Document</title>
   </head>
   <body>
-    Hello sign up to this silly project app here. <%-
-    include("partials/errors.ejs") %>
-
+    <h1>Sign up to this silly app</h1>
+    <%- include("partials/errors.ejs") %>
     <form action="/auth/sign-up" method="post">
       <label for="firstName">First name:</label>
       <input type="text" id="firstName" name="firstName" />

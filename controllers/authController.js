@@ -15,31 +15,13 @@ async function handleSignUp(req, res) {
   // const userData = matchedData(req);
 
   const errors = validationResult(req);
+
   if (!errors.isEmpty()) {
-    console.log("errors caught");
-
-    // return res.status(400).render("createUser", {
-    //   title: "Create user",
-    //   errors: errors.array(),
-    // });
-    /* handle errors */
+    return res.status(400).render("signUp", {
+      title: "Create user",
+      errors: errors.array(),
+    });
   }
-  // const userData = matchedData(req, { locations: ["body"] });
-
-  // const userData = {
-  //   firstName: req.body.firstName,
-  //   lastName: req.body.lastName,
-  //   email: req.body.email,
-  //   password: req.body.password,
-  // };
-
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.status(400).render("createUser", {
-  //     title: "Create user",
-  //     errors: errors.array(),
-  //   });
-  // }
 
   const userData = matchedData(req, { locations: ["body"] });
 
@@ -62,10 +44,21 @@ async function handleLogin(req, res) {
     email: req.body.email,
     password: req.body.password,
   };
-  console.log(req.body.email);
-  const result = await loginUserQuery(userData);
-  // Need to include login verification and then cookie shit.
-  res.redirect("/");
+  try {
+    const user = await loginUserQuery(userData);
+
+    if (!user) {
+      return res
+        .status(401)
+        .render("signUp", { error: "Invalid email or password" });
+    }
+
+    // Need to include login verification and then cookie shit.
+    return res.redirect("/");
+  } catch (err) {
+    console.error(err.context || err);
+    return res.status(500).render("signUp", { error: "Internal Server error" });
+  }
 }
 
 async function showJoinForm(req, res) {

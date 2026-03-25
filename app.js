@@ -2,8 +2,6 @@ const express = require("express");
 const app = express();
 app.set("view engine", "ejs");
 
-const { body, validationResult } = require("express-validator");
-
 app.use(express.urlencoded({ extended: true }));
 
 const authRouter = require("./routes/authRouter");

@@ -16,37 +16,14 @@ const validateUser = [
     .withMessage(`Last name ${alphaErr}`)
     .isLength({ min: 1, max: 10 })
     .withMessage(`Last name ${lengthErr}`),
-
   body("email")
     .trim()
-
     .isLength({ min: 1, max: 20 })
     .withMessage(`Email ${lengthErr}`),
-  body("passwordhash")
+  body("password")
     .trim()
-    .isAlpha()
-    .withMessage(`passwordhash ${alphaErr}`)
     .isLength({ min: 1, max: 10 })
-    .withMessage(`passwordhash ${lengthErr}`),
-];
-
-// We can pass an entire array of middleware validations to our controller.
-exports.usersCreatePost = [
-  validateUser,
-  (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      return res.status(400).render("createUser", {
-        title: "Create user",
-        errors: errors.array(),
-      });
-    }
-
-    // PLACEHOLDER IN THE EXAMPLE WHEN THERE WA NO DATABASE. ADAPT TO EXISTING DATABASE.
-    const { firstName, lastName } = matchedData(req);
-    usersStorage.addUser({ firstName, lastName });
-    res.redirect("/");
-  },
+    .withMessage(`password ${lengthErr}`),
 ];
 
 module.exports = { validateUser };
