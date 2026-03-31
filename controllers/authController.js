@@ -11,7 +11,7 @@ function showSignUpForm(req, res) {
   res.render("signUp");
 }
 
-async function handleSignUp(req, res) {
+async function handleSignUp(req, res, next) {
   // const userData = matchedData(req);
 
   const errors = validationResult(req);
@@ -23,13 +23,17 @@ async function handleSignUp(req, res) {
     });
   }
 
-  const userData = matchedData(req, { locations: ["body"] });
+  try {
+    const userData = matchedData(req, { locations: ["body"] });
 
-  const result = await createUserQuery(userData);
+    const result = await createUserQuery(userData);
 
-  console.log("Query result:", result);
+    console.log("Query result:", result);
 
-  res.redirect("/");
+    res.redirect("/");
+  } catch (err) {
+    return next(err);
+  }
 }
 
 function showLoginForm(req, res) {

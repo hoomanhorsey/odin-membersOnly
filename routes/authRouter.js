@@ -14,7 +14,7 @@ authRouter.post(
 );
 
 authRouter.get("/login", authController.showLoginForm);
-authRouter.post("/l ogin", authController.handleLogin);
+authRouter.post("/login", authController.handleLogin);
 
 authRouter.get("/join", authController.handleSignUp);
 authRouter.post("/join", authController.handleJoin);
