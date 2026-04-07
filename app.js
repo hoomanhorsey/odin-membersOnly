@@ -1,9 +1,9 @@
 // Required Dependencies
-
 const express = require("express");
 const app = express();
 const path = require("node:path");
 const session = require("express-session");
+const bcrypt = require("bcryptjs");
 
 // Passport config set up in sep file and set up as a side effect import
 const passport = require("passport");
@@ -25,18 +25,18 @@ app.use(passport.session());
 
 // Loads user from session cookie if logged in
 app.use((req, res, next) => {
-  res.locals.user = req.user;
+  res.locals.currentUser = req.user;
   next();
 });
 
 // Routers setup
 const authRouter = require("./routes/authRouter");
-const userRouter = require("./routes/userRouter");
+// const userRouter = require("./routes/userRouter");
 const msgRouter = require("./routes/msgRouter");
 
 // Route Middleware
 app.use("/auth", authRouter);
-app.use("/users", userRouter);
+// app.use("/users", userRouter);
 app.use("/", msgRouter);
 
 // Example route (this can be more specific later)

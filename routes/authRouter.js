@@ -8,38 +8,41 @@ const authRouter = Router();
 const authController = require("../controllers/authController");
 const validation = require("../validation/authValidators");
 
-authRouter.get("/sign-up", authController.showSignUpForm);
+authRouter.get("/signUp", authController.showSignUpForm);
+
 authRouter.post(
-  "/sign-up",
+  "/signUp",
   validation.validateUser,
   authController.handleSignUp,
 );
 
 authRouter.get("/login", authController.showLoginForm);
 
-// this is redundant cos we now have the passport middlware.
-// authRouter.post("/login", authController.handleLogin);
-
-// this route is using passport middleware
+// this route is using passport middleware, and so it's kept in the router
 authRouter.post(
   "/login",
-  // following function just to test whether the post route has been hit
-  (req, res, next) => {
-    console.log("POST /auth/login hit");
-    next();
-  },
   passport.authenticate("local", {
     successRedirect: "/",
     failureRedirect: "/auth/login",
   }),
 );
 
+authRouter.get("/logout", (req, res, next) => {
+  console.log("loggingout");
+  req.logout((err) => {
+    if (err) {
+      return next(err);
+    }
+    res.redirect("/");
+  });
+});
+
 authRouter.get("/join", authController.handleSignUp);
 authRouter.post("/join", authController.handleJoin);
 
-authRouter.get("/:userId", (req, res) => {
-  const { authorId } = req.params;
-  res.send(`Author ID: ${authorId}`);
-});
+// authRouter.get("/:userId", (req, res) => {
+//   const { authorId } = req.params;
+//   res.send(`Author ID: ${authorId}`);
+// });
 
 module.exports = authRouter;

@@ -15,7 +15,7 @@ async function createUserQuery(userData) {
         userData.password,
       ],
     );
-    console.log(rows[0]);
+    console.log("from inside query", rows[0]);
     return rows[0];
   } catch (err) {
     err.context = { function: "createUserQuery", input: userData };

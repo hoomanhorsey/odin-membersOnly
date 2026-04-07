@@ -1,4 +1,5 @@
 const { body, validationResult, matchedData } = require("express-validator");
+const bcrypt = require("bcryptjs");
 
 // Import the query function from userQueries.js
 
@@ -9,8 +10,7 @@ function showSignUpForm(req, res) {
 }
 
 async function handleSignUp(req, res) {
-  // const userData = matchedData(req);
-
+  console.log("handlesignup function called");
   // calls validationResult, from the express-validator middleware that is called in the sequence setout in th authRouter for /post sign-up path.
   const errors = validationResult(req);
 
@@ -26,8 +26,14 @@ async function handleSignUp(req, res) {
     // Extracts data from fields validated by express-validator
     const userData = matchedData(req, { locations: ["body"] });
 
+    // hashes submitted password
+    const hashedPassword = await bcrypt.hash(userData.password, 10);
+
     // async call to query that updates db with new user data.
-    const result = await createUserQuery(userData);
+    const result = await createUserQuery({
+      ...userData,
+      password: hashedPassword,
+    });
 
     console.log("Query result:", result);
 
