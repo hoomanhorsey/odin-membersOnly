@@ -3,7 +3,10 @@ const bcrypt = require("bcryptjs");
 
 // Import the query function from userQueries.js
 
-const { createUserQuery } = require("../db/queries/authQueries");
+const {
+  createUserQuery,
+  addMemberQuery,
+} = require("../db/queries/authQueries");
 
 function showSignUpForm(req, res) {
   res.render("signUp");
@@ -72,7 +75,12 @@ function showMembershipForm(req, res) {
 
 async function handleMembershipApplication(req, res) {
   console.log("pladeholder til I put in membership logic");
-  res.render("membership");
+  console.log(req.body.membershipassword);
+  console.log(res.locals.currentUser);
+  if (req.body.membershipPassword === "fidelio") {
+    await addMemberQuery(res.locals.currentUser.email);
+  }
+  res.redirect("/");
 }
 module.exports = {
   showLoginForm,

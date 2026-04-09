@@ -23,23 +23,19 @@ async function createUserQuery(userData) {
   }
 }
 
-async function loginUserQuery(userData) {
-  // eventually here you would use your SQL or query code
-  console.log("createUser query called");
-  const { rows } = await pool.query("SELECT * FROM users");
-  console.log(rows[0]);
-  console.log("Pretend to login user");
-  return "User pretended to log in";
-}
+async function addMemberQuery(email) {
+  console.log("update status of member " + email);
 
-async function joinUserQuery() {
-  // insert logic
+  const { rows } = await pool.query(
+    `UPDATE users SET membershipstatus = TRUE WHERE email = $1 RETURNING *`,
+    [email],
+  );
 
-  return "to be completed";
+  return rows;
 }
 
 // Export it
 module.exports = {
   createUserQuery,
-  loginUserQuery,
+  addMemberQuery,
 };
