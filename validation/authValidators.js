@@ -42,6 +42,17 @@ const validateUser = [
     .withMessage("Password must include an uppercase letter")
     .matches(/[^A-Za-z0-9]/)
     .withMessage("Password must include a symbol"),
+  body("confirmPassword")
+    .trim()
+    .notEmpty()
+    .withMessage("Confirm password cannot be empty")
+    .bail()
+    .custom((value, { req }) => {
+      if (value !== req.body.password) {
+        throw new Error("Passwords do not match");
+      }
+      return true;
+    }),
 ];
 
 module.exports = { validateUser };

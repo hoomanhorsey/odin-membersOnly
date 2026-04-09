@@ -1,4 +1,21 @@
+Things to do:
 
+- logout route, including actually log out
+
+- membership join route / query
+
+- admin status?
+
+- Authorisation, think about route checking for queries, think about authorisation to determine info being displayed in views
+
+
+
+
+
+Issues
+
+- signUp
+    - duplicate data, like same email addresses, cause an error.
 
 
 CREATE TABLE users ( 

@@ -10,6 +10,7 @@
 <% if (currentUser) { %> 
   <p>Welcome <%= currentUser.email %></p>
   <a href="/auth/logout">Logout</a>
+  <a href="/auth/membership">Apply for membership</a>
 <% } else { %>
   <a href="/auth/login">Login</a>
   <a href="/auth/signup">Sign up</a>
@@ -19,7 +20,8 @@
     <% messages.forEach(message => { %>
       <li>
         <h2> <%= message.messagetitle %> </h2>
-        <p> <%= message.messagetext %> </p>
+        <p> Posted by: <%= message.firstname ? (message.firstname+ ' ' + message.lastname) : 'User name not visible unless logged in' %></p>
+        <p><i> <%= message.messagetext %> </i></p>
         <p>Created at: <%=message.timecreated %> </p>
 
       </li>

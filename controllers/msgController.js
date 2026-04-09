@@ -1,10 +1,27 @@
 // Import the query function from userQueries.js
-const { getAllMsgsQuery } = require("../db/queries/msgQueries");
+const {
+  getAllMsgsQuery,
+  getAllMsgsQueryLoggedOut,
+} = require("../db/queries/msgQueries");
 
 async function showMsgs(req, res) {
-  const rows = await getAllMsgsQuery();
-  res.render("index", { messages: rows });
+  let rows = [];
+
+  if (!req.user) {
+    rows = await getAllMsgsQueryLoggedOut();
+    console.log(rows);
+
+    res.render("index", { messages: rows });
+  } else {
+    rows = await getAllMsgsQuery();
+    console.log(rows);
+    res.render("index", { messages: rows });
+  }
 }
+
+//   const rows = await getAllMsgsQuery();
+//   res.render("index", { messages: rows });
+// }
 
 // async function createUser(req, res) {
 //   const userData = {

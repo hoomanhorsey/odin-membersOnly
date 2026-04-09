@@ -40,6 +40,9 @@ authRouter.get("/logout", (req, res, next) => {
 authRouter.get("/join", authController.handleSignUp);
 authRouter.post("/join", authController.handleJoin);
 
+authRouter.get("/membership", authController.showMembershipForm);
+authRouter.post("/membership", authController.handleMembershipApplication);
+
 // authRouter.get("/:userId", (req, res) => {
 //   const { authorId } = req.params;
 //   res.send(`Author ID: ${authorId}`);

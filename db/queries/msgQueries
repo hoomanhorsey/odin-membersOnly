@@ -1,11 +1,33 @@
 const pool = require("../pool");
 
 async function getAllMsgsQuery() {
-  const { rows } = await pool.query("SELECT * FROM messages");
+  const { rows } = await pool.query(`SELECT
+      messages.id,
+      messages.messageTitle,
+      messages.messageText,
+      messages.timeCreated,
+      users.firstname, 
+      users.lastname
+    FROM messages 
+    JOIN users ON messages.user_id = users.id`);
+  return rows;
+}
+
+async function getAllMsgsQueryLoggedOut() {
+  const { rows } = await pool.query(
+    `SELECT
+      messages.id,
+      messages.messageTitle,
+      messages.messageText,
+      messages.timeCreated
+    FROM messages
+      `,
+  );
   return rows;
 }
 
 // Export it
 module.exports = {
   getAllMsgsQuery,
+  getAllMsgsQueryLoggedOut,
 };

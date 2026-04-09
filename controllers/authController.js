@@ -24,7 +24,9 @@ async function handleSignUp(req, res) {
 
   try {
     // Extracts data from fields validated by express-validator
-    const userData = matchedData(req, { locations: ["body"] });
+    const { confirmedPassword, ...userData } = matchedData(req, {
+      locations: ["body"],
+    });
 
     // hashes submitted password
     const hashedPassword = await bcrypt.hash(userData.password, 10);
@@ -54,7 +56,7 @@ function showLoginForm(req, res) {
   res.render("login");
 }
 
-async function showJoinForm(req, res) {
+function showJoinForm(req, res) {
   // insert logic
   res.redirect("/");
 }
@@ -64,10 +66,20 @@ async function handleJoin(req, res) {
   res.redirect("/");
 }
 
+function showMembershipForm(req, res) {
+  res.render("membership");
+}
+
+async function handleMembershipApplication(req, res) {
+  console.log("pladeholder til I put in membership logic");
+  res.render("membership");
+}
 module.exports = {
   showLoginForm,
   showSignUpForm,
   handleSignUp,
   showJoinForm,
   handleJoin,
+  showMembershipForm,
+  handleMembershipApplication,
 };
