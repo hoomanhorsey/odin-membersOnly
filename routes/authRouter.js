@@ -7,6 +7,7 @@ const authRouter = Router();
 
 const authController = require("../controllers/authController");
 const validation = require("../validation/authValidators");
+const authorisation = require("../middleware/auth");
 
 authRouter.get("/signUp", authController.showSignUpForm);
 
@@ -40,7 +41,11 @@ authRouter.get("/logout", (req, res, next) => {
 authRouter.get("/join", authController.handleSignUp);
 authRouter.post("/join", authController.handleJoin);
 
-authRouter.get("/membership", authController.showMembershipForm);
+authRouter.get(
+  "/membership",
+  authorisation.ensureAuthenticated,
+  authController.showMembershipForm,
+);
 authRouter.post("/membership", authController.handleMembershipApplication);
 
 // authRouter.get("/:userId", (req, res) => {

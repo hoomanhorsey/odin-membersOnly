@@ -1,4 +1,12 @@
+
+
+
+
+
 Things to do:
+
+- can access membership screen if not logged in, should check for authorisation of route before allowing access, otherwise it's unauthroised.
+
 
 - logout route, including actually log out
 
@@ -31,8 +39,8 @@ CREATE TABLE users (
 CREATE TABLE messages (
     id INTEGER PRIMARY KEY,
     user_id INTEGER NOT NULL,
-    messageTitle TEXT,
-    messageText TEXT NOT NULL,
+    messagetitle TEXT,
+    messagetext TEXT NOT NULL,
     timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_ID) REFERENCES users(id)
     );

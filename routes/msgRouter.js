@@ -7,4 +7,7 @@ const msgController = require("../controllers/msgController");
 
 msgRouter.get("/", msgController.showMsgs);
 
+msgRouter.get("/new", msgController.displayNewMessageForm);
+msgRouter.post("/new", msgController.postNewMessage);
+
 module.exports = msgRouter;

@@ -8,12 +8,17 @@
   <body>
     Hello login to this silly project app here.
 
-    <form action="/auth/login" method="post">
-      <label for="email">Email</label>
-      <input type="email" id="email" name="email" />
+    <form action="/message/new" method="post">
+      <label for="messagetitle">Message Title</label>
+      <input type="text" id="messagetitle" name="messagetitle" />
 
-      <label for="password">Password</label>
-      <input type="password" id="password" name="password" />
+      <label for="messagetext">Message Text</label>
+      <textarea
+        id="messagetext"
+        name="messagetext"
+        rows="8"
+        cols="50"
+      ></textarea>
 
       <button type="submit">Submit</button>
     </form>

@@ -18,8 +18,7 @@ async function getAllMsgsQueryLoggedOut() {
     `SELECT
       messages.id,
       messages.messageTitle,
-      messages.messageText,
-      messages.timeCreated
+      messages.messageText
     FROM messages
       `,
   );

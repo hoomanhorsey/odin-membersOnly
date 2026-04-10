@@ -19,6 +19,14 @@ async function showMsgs(req, res) {
   }
 }
 
+function displayNewMessageForm(req, res) {
+  // res.send("new message form should be here pls");
+  res.render("newMessage");
+}
+
+async function postNewMessage(req, res) {
+  console.log("placeholder");
+}
 //   const rows = await getAllMsgsQuery();
 //   res.render("index", { messages: rows });
 // }
@@ -37,4 +45,4 @@ async function showMsgs(req, res) {
 //   res.redirect("/");
 // }
 
-module.exports = { showMsgs };
+module.exports = { showMsgs, displayNewMessageForm, postNewMessage };

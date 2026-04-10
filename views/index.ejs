@@ -6,18 +6,26 @@
     <title>Document</title>
   </head>
   <body>
-
-<% if (currentUser && currentUser.membershipstatus === true) {%>
-Memership Status: Fullmember
+<p>
+<% if (currentUser && currentUser.membershipstatus === true) { %>
+Membership Status: Full member
+<% } else if (!currentUser) { %>
+Membership Status: Not signed in
 <% } else { %>
-Memership Status: Not a member
+Membership Status: Not a member
 
-<% } %> 
+  <a href="/auth/membership">Apply for membership</a>
+
+<% } %>
 
 <% if (currentUser) { %> 
   <p>Welcome <%= currentUser.email %></p>
+
+  <p>
   <a href="/auth/logout">Logout</a>
-  <a href="/auth/membership">Apply for membership</a>
+    <a href="/messages/new">Create new message</a>
+
+  </p>
 <% } else { %>
   <a href="/auth/login">Login</a>
   <a href="/auth/signup">Sign up</a>
@@ -27,9 +35,14 @@ Memership Status: Not a member
     <% messages.forEach(message => { %>
       <li>
         <h2> <%= message.messagetitle %> </h2>
+
         <p> Posted by: <%= message.firstname ? (message.firstname+ ' ' + message.lastname) : 'User name not visible unless logged in' %></p>
+
         <p><i> <%= message.messagetext %> </i></p>
-        <p>Created at: <%=message.timecreated %> </p>
+
+
+        <p> Created at: <%= message.timecreated ? message.timecreated : 'Time created not visible unless logged in' %></p>
+
 
       </li>
       <% }); %>
