@@ -38,13 +38,35 @@ VALUES
 
 async function main() {
   console.log("seeding...");
+
+  const dbUrl = process.env.DATABASE_URL;
+
+  if (!dbUrl) {
+    throw new Error("DATABASE_URL is not set");
+  }
+
   const client = new Client({
-    connectionString: "postgresql://dev_user@localhost:5432/members_only",
+    connectionString: dbUrl,
   });
+
   await client.connect();
   await client.query(SQL);
   await client.end();
+
   console.log("done");
 }
 
 main();
+
+// async function main() {
+//   console.log("seeding...");
+//   const client = new Client({
+//     connectionString: "postgresql://dev_user@localhost:5432/members_only",
+//   });
+//   await client.connect();
+//   await client.query(SQL);
+//   await client.end();
+//   console.log("done");
+// }
+
+// main();
