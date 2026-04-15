@@ -20,8 +20,8 @@ CREATE TABLE users (
 CREATE TABLE messages (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id INTEGER NOT NULL,
-    messageTitle TEXT,
-    messageText TEXT NOT NULL,
+    messagetitle TEXT,
+    messageext TEXT NOT NULL,
     timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
     );

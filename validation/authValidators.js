@@ -53,6 +53,8 @@ const validateUser = [
       }
       return true;
     }),
+  // checkbox: converts "1" to true, missing → omitted
+  body("adminstatus").optional().toBoolean(),
 ];
 
 module.exports = { validateUser };

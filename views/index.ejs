@@ -43,6 +43,16 @@ Membership Status: Not a member
 
         <p> Created at: <%= message.timecreated ? message.timecreated : 'Time created not visible unless logged in' %></p>
 
+        <% if (currentUser && currentUser.adminstatus === true) { %>
+
+
+          <form method="post" action="/messages/delete/<%=message.id%>">
+
+          <button type="submit" >Delete message</button>
+
+
+          </form>
+      <% } %>
 
       </li>
       <% }); %>

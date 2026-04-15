@@ -7,12 +7,13 @@ async function createUserQuery(userData) {
   console.log("Calling createUserQuery", userData);
   try {
     const { rows } = await pool.query(
-      "INSERT INTO users (firstName, lastName, email, password) VALUES ($1, $2, $3, $4) RETURNING *",
+      "INSERT INTO users (firstName, lastName, email, password, adminstatus) VALUES ($1, $2, $3, $4, $5) RETURNING *",
       [
         userData.firstName,
         userData.lastName,
         userData.email,
         userData.password,
+        userData.adminstatus,
       ],
     );
     console.log("from inside query", rows[0]);

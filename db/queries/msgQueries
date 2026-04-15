@@ -25,8 +25,28 @@ async function getAllMsgsQueryLoggedOut() {
   return rows;
 }
 
+async function postNewMessageQuery(
+  user_id,
+
+  messagetitle,
+  messagetext,
+) {
+  console.log(user_id, messagetitle, messagetext);
+
+  await pool.query(
+    `INSERT INTO messages
+    (user_id, messagetitle, messagetext) VALUES ($1, $2, $3)`,
+    [user_id, messagetitle, messagetext],
+  );
+}
+
+async function deleteMessageQuery(user_id) {
+  await pool.query(`DELETE FROM messages WHERE messages.id = $1`, [user_id]);
+}
 // Export it
 module.exports = {
   getAllMsgsQuery,
   getAllMsgsQueryLoggedOut,
+  postNewMessageQuery,
+  deleteMessageQuery,
 };

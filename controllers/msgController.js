@@ -2,47 +2,84 @@
 const {
   getAllMsgsQuery,
   getAllMsgsQueryLoggedOut,
+  postNewMessageQuery,
+  deleteMessageQuery,
 } = require("../db/queries/msgQueries");
 
 async function showMsgs(req, res) {
   let rows = [];
+  console.log("from showmsgs ", req.user);
 
-  if (!req.user) {
-    rows = await getAllMsgsQueryLoggedOut();
-    console.log(rows);
+  console.log("req.user ===", req.user);
+  console.log(
+    "type:",
+    typeof req.user,
+    "membership:",
+    req.user?.membershipstatus,
+  );
 
-    res.render("index", { messages: rows });
-  } else {
+  if (req.user && req.user.membershipstatus === true) {
     rows = await getAllMsgsQuery();
     console.log(rows);
     res.render("index", { messages: rows });
+  } else {
+    rows = await getAllMsgsQueryLoggedOut();
+    console.log(rows);
+    res.render("index", { messages: rows });
   }
+
+  // if (!req.user) {
+  //   rows = await getAllMsgsQueryLoggedOut();
+  //   console.log(rows);
+
+  //   res.render("index", { messages: rows });
+  // } else {
+  //   rows = await getAllMsgsQuery();
+  //   console.log(rows);
+  //   res.render("index", { messages: rows });
+  // }
 }
 
 function displayNewMessageForm(req, res) {
   // res.send("new message form should be here pls");
+
+  console.log("displaying new msg");
   res.render("newMessage");
 }
 
 async function postNewMessage(req, res) {
   console.log("placeholder");
+  console.log(res.locals.currentUser);
+  try {
+    await postNewMessageQuery(
+      res.locals.currentUser.id,
+      req.body.messagetitle,
+      req.body.messagetext,
+    );
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Internal error");
+  }
 }
-//   const rows = await getAllMsgsQuery();
-//   res.render("index", { messages: rows });
-// }
 
-// async function createUser(req, res) {
-//   const userData = {
-//     fname: req.body.fname,
-//     lname: req.body.lname,
-//     email: req.body.email,
-//     password: req.body.password,
-//   };
-//   const result = await createUserQuery(userData);
+async function deleteMessage(req, res) {
+  console.log(req.params.id);
+  console.log("delete poo ");
 
-//   console.log("Query result:", result);
+  try {
+    await deleteMessageQuery(req.params.id);
+    res.redirect("/");
+  } catch (err) {
+    console.error(err);
 
-//   res.redirect("/");
-// }
+    res.status(500).send("Internal error");
+  }
+}
 
-module.exports = { showMsgs, displayNewMessageForm, postNewMessage };
+module.exports = {
+  showMsgs,
+  displayNewMessageForm,
+  postNewMessage,
+  deleteMessage,
+};

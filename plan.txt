@@ -5,6 +5,12 @@
 
 Things to do:
 
+- can see date and author of posts without being a member. Need to restrict to members only.
+
+Delete does not delete post.
+
+
+
 - can access membership screen if not logged in, should check for authorisation of route before allowing access, otherwise it's unauthroised.
 
 
