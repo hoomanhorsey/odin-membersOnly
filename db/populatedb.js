@@ -21,7 +21,7 @@ CREATE TABLE messages (
     id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     user_id INTEGER NOT NULL,
     messagetitle TEXT,
-    messageext TEXT NOT NULL,
+    messagetext TEXT NOT NULL,
     timeCreated TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
     );
@@ -47,6 +47,9 @@ async function main() {
 
   const client = new Client({
     connectionString: dbUrl,
+    ssl: {
+      rejectUnauthorized: false,
+    },
   });
 
   await client.connect();
