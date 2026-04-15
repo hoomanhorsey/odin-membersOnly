@@ -3,6 +3,9 @@ const express = require("express");
 const app = express();
 const path = require("node:path");
 const session = require("express-session");
+require("dotenv").config();
+
+console.log("DATABASE_URL exists?", !!process.env.DATABASE_URL);
 
 // Passport config set up in sep file and set up as a side effect import
 const passport = require("passport");
