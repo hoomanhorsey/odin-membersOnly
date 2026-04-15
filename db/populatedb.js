@@ -39,7 +39,7 @@ VALUES
 async function main() {
   console.log("seeding...");
 
-  const dbUrl = process.env.DATABASE_URL;
+  const dbUrl = process.argv[2];
 
   if (!dbUrl) {
     throw new Error("DATABASE_URL is not set");
